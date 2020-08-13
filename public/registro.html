@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport"
+    content="width=device-width, user-scaleable=no , initial-scale=1.0,maximum-scale=1.0, minimum-scale=1.0">
+  <title>REGISTRAR USUARIO</title>
+
+  <link rel="icon" type="image/png" href="img/logo.png" />
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+    integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/estilo.css">
+
+</head>
+
+<body>
+  <section class="registro">
+    <h4>Registro</h4>
+    <input class="controles" type="text" id="nombre_uno" placeholder="Ingrese su  Primer Nombre" />
+    <input class="controles" type="text" id="nombre_dos" placeholder="Ingrese su Segundo Nombre" />
+    <input class="controles" type="text" id="apellido_uno" placeholder="Ingrese su Primer Apellido" />
+    <input class="controles" type="text" id="apellido_dos" placeholder="Ingrese su Segundo Apellido" />
+    <input class="controles" type="text" id="telefono" placeholder="Ingrese Numero Telefonico" />
+    <input class="controles" type="email" id="correo" placeholder="Ingrese su Correo" />
+    <input class="controles" type="password" id="clave" placeholder="Ingrese su Contraseña" />
+    <input class="controles" type="password" id="clave_confirmada" placeholder="Confirme su Contrseña" />
+    <input class="boton" onclick=" Registrar()" type="submit" value="Registrar" />
+  </section>
+
+
+  <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
+    integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
+    integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
+    integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+    crossorigin="anonymous"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
+
+
+  <script src="app.js" charset="utf-8"></script>
+</body>
+
+</html>
