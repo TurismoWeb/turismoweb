@@ -1,5 +1,5 @@
 
-alert ('probando 2')
+
 
 var firebaseConfig = {
     apiKey: "AIzaSyBL_LLC4evVeYSpHhYl97uF2jg-hxwAP8I",
@@ -89,6 +89,25 @@ function Registrar() {
 
     }
 }
+function iniciar(){
+   
+   var user = ObtenerId("usuario")
+    var clave = ObtenerId("clave")
+    db.collection("usuarios").where("Usuario", "==", user).where("Clave", "==", clave)
+    .get()
+    .then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            ComprobarInicio = true;
+           alert('HAZ INICIADO SESION CORRECTAMENTE')
+           window.location.href = "index.html";
+            console.log(doc.id, " => ", doc.data());
+        });
+    })
+    .catch(function(error) {
+        console.log("Error getting documents: ", error);
+    });
+}
+
 
 
 function ColeccionPersona(Nombre_uno, Nombre_dos, Apellido_uno, Apellido_dos, Telefono, Correo, Clave) {
