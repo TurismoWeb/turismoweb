@@ -27,7 +27,7 @@ window.addEventListener('DOMContentLoaded', async (e) => {
     const querySnapshot = await getSitios();
     querySnapshot.forEach(doc => {
         task_sitios.innerHTML += `
-        <div class="card" style="width: 20rem;">
+        <div class="card " style="width: 20rem; ">
         <img class="card-img-top img-fluid" src="img/calera/calera.png" alt="Card image cap">
         <div class="card-block">
           <h4 class="card-title">${doc.data().nombre}</h4>
@@ -39,9 +39,12 @@ window.addEventListener('DOMContentLoaded', async (e) => {
           <a href="#" class="btn btn-outline-primary btn-block">Registrar Momento</a>
         </div>
       </div>
+    
         `
     })
 })
+
+
 
 
 

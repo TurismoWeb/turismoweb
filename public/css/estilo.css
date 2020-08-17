@@ -3,8 +3,10 @@
   padding: 0;
   box-sizing: border-box;
 }
+
 body {
   margin-top: 15px;
+ 
 }
 
 .container {
@@ -135,3 +137,29 @@ header nav ul li a:hover {
   font-size: 16px;
   box-shadow: 1px 1px 1px #000;
 }
+
+
+
+
+
+.contenedor_img{
+  width: 40%;
+  height: 40%;
+  border-radius: 10px;
+  margin:auto;
+  background:  #00b769;
+  margin-top: 20px;
+  box-shadow: 3px 3px 3px #000;
+  margin-bottom: 100px;
+}
+.img{
+
+  width:300px;
+  display: block;
+  margin: auto;
+  padding:20px 20px;
+  border-radius: 30px;
+}
+
+
+
