@@ -5,7 +5,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Proyecto Básico</title>
+  <title>Sitios turisticos</title>
+  <link rel="icon" type="image/png" href="img/logo.png" />
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
     integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
@@ -18,9 +19,10 @@
   <header>
     <nav>
       <ul>
-        <li><a href="login.html">INICIAR SESION</a></li>
-        <li><a href="registro.html">REGISTRARSE</a></li>
-        <li><a href="registrarsitio.html">REGISTRAR SITIO TURISTICO</a></li>
+        <li id="iniciar_sesion"><a href="login.html">INICIAR SESION</a></li>
+        <li id="cerrar_sesion"><a href="#" onclick="Menu_Cerrarsesion()">CERRAR SESION</a></li>
+        <li id="registrarse"><a href="registro.html">REGISTRARSE</a></li>
+        <li><a href="#" onclick="Menu_RegistrarSitio()">REGISTRAR SITIO TURISTICO</a></li>
       </ul>
     </nav>
   </header>
@@ -32,7 +34,7 @@
 
     <div class="row">
 
-      <div class="card-columns" id="tasks-sitios";">
+      <div class="card-columns" id="tasks-sitios" ;">
 
       </div>
 
