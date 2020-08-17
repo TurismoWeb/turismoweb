@@ -8,7 +8,7 @@ var firebaseConfig = {
     appId: "1:361696427572:web:93de2285ebce8480679461"
 };
 
-ComprobarInicio = false;
+
 
 firebase.initializeApp(firebaseConfig);
 
@@ -31,8 +31,10 @@ window.addEventListener('DOMContentLoaded', async (e) => {
     if (user) {
 
         myVar = JSON.parse(user);
+
         console.log(myVar.TipoUsuario);
         if (myVar.TipoUsuario == 0) {
+
             console.log('cargando sitios : no administrador');
             await _mostrarsitiosverificados();
         } else {
@@ -73,12 +75,27 @@ async function _mostrarsitiosverificados() {
       <p class="card-text"> PUNTUACION: ${doc.data().puntuacion} </p>
       <p class="card-text"> SERVICIOS: ${doc.data().servicios} </p>
       <p class="card-text">PRESUPUETO: ${doc.data().presupuesto}</p>
-      <a href="#" class="btn btn-outline-primary btn-block">Ver detalles</a>
+      <a href="#" class="btn btn-outline-primary btn-block" 
+      onclick="VerDetalle('${doc.data().nombre}','${doc.data().puntuacion}' ,'${doc.data().servicios}' 
+      ,'${doc.data().presupuesto}','${doc.data().ubicacion}')" 
+      >Ver detalles</a>
       <a href="#" class="btn btn-outline-primary btn-block">Registrar Momento</a>
     </div>
   </div>
     `
     })
+}
+
+function VerDetalle(Nombre_sitio, Puntuacion, Servicios, Presupuesto, Ubicacion){
+    myVar = {
+        nombre: Nombre_sitio,
+        puntuacion: Puntuacion,
+        servicios: Servicios,
+        presupuesto: Presupuesto,
+        ubicacion: Ubicacion,
+    };
+    localStorage['detallesitioalmacenado'] = JSON.stringify(myVar);
+    window.location.href="detalles.html";
 }
 
 async function _mostrartodoslossitios() {
@@ -203,14 +220,13 @@ function Menu_RegistrarSitio() {
 
 
 function iniciar() {
-
     var user = ObtenerId("usuario")
     var clave = ObtenerId("clave")
     db.collection("usuarios").where("Usuario", "==", user).where("Clave", "==", clave)
         .get()
         .then(function (querySnapshot) {
             querySnapshot.forEach(function (doc) {
-                ComprobarInicio = true;
+              
                 alert('HAZ INICIADO SESION CORRECTAMENTE')
 
                 myVar = {
@@ -230,6 +246,7 @@ function iniciar() {
             console.log("Error getting documents: ", error);
         });
 }
+
 
 
 
