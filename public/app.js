@@ -31,8 +31,8 @@ window.addEventListener('DOMContentLoaded', async (e) => {
     if (user) {
 
         myVar = JSON.parse(user);
-
-        if (myVar.TipoUusario == 0) {
+        console.log(myVar.TipoUsuario);
+        if (myVar.TipoUsuario == 0) {
             console.log('cargando sitios : no administrador');
             await _mostrarsitiosverificados();
         } else {
