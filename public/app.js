@@ -109,10 +109,20 @@ async function _mostrartodoslossitios() {
         var botones = ``
         if (doc.data().estado_validacion) {
             botones = `
-            <a href="#" class="btn btn-outline-primary btn-block">Ver detalles</a>
-            <a href="#" class="btn btn-outline-primary btn-block">Registrar Momento</a>`
+            <a 
+            href="#" 
+            class="btn btn-outline-primary btn-block" 
+            onclick="VerDetalle('${doc.id}','${doc.data().nombre}','${doc.data().puntuacion}' ,'${doc.data().servicios}' 
+            ,'${doc.data().presupuesto}','${doc.data().ubicacion}')" 
+            >Ver detalles</a>`
         } else {
             botones = `
+            <a 
+            href="#" 
+            class="btn btn-outline-primary btn-block" 
+            onclick="VerDetalle('${doc.id}','${doc.data().nombre}','${doc.data().puntuacion}' ,'${doc.data().servicios}' 
+            ,'${doc.data().presupuesto}','${doc.data().ubicacion}')" 
+            >Ver detalles</a>
             <a 
             href="#" 
             class="btn btn-outline-primary btn-block" 
