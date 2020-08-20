@@ -4,10 +4,6 @@
   box-sizing: border-box;
 }
 
-body {
-  margin-top: 15px;
- 
-}
 
 .container {
   display: flex;
@@ -143,7 +139,6 @@ header nav ul li a:hover {
   width:600px;
   display: block;
   margin: auto;
-
   padding:20px 20px;
   border-radius: 30px;
 }
@@ -154,10 +149,10 @@ header nav ul li a:hover {
 
 
 .bton_momento{
-  width: 600px;
+  width: 20%;
   display: block;
-  margin: 50px auto ;
-  padding:20px 20px;
+  margin: 20px auto ;
+  padding:5px 5px;
   font-size: 16px;
   box-shadow: 1px 1px 1px #000;
   background: #03663b;
@@ -167,15 +162,23 @@ header nav ul li a:hover {
 
 
 .text_area{
-  width: 600px;
+  max-width: 600px;
+  min-width: 600px;
   display: block;
-  margin: 50px auto ;
+  margin: 20px auto ;
   padding:20px 20px;
   font-size: 16px;
   box-shadow: 1px 1px 1px #000;
   background: white;
   border: none;
   color: black;
+}
+
+#imgSubida{
+  max-width: 100px;
+  max-height:  100px;
+  display: block;
+  margin: 20px auto ;
 }
 
 

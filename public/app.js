@@ -12,13 +12,16 @@ var firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
+var storage = firebase.storage();
 var db = firebase.firestore();
+var storageRef = firebase.storage().ref();
 
-const task_sitios = document.getElementById('tasks-sitios');
 
 function ObtenerId(id) {
     return document.getElementById(id).value;
 }
+
+const task_sitios = document.getElementById('tasks-sitios');
 
 const getSitiosVerificados = () => db.collection('sitios_turisticos')
     .where("estado_validacion", "==", 1).get();
@@ -76,24 +79,25 @@ async function _mostrarsitiosverificados() {
       <p class="card-text"> SERVICIOS: ${doc.data().servicios} </p>
       <p class="card-text">PRESUPUETO: ${doc.data().presupuesto}</p>
       <a href="#" class="btn btn-outline-primary btn-block" 
-      onclick="VerDetalle('${doc.data().nombre}','${doc.data().puntuacion}' ,'${doc.data().servicios}' 
+      onclick="VerDetalle('${doc.id}','${doc.data().nombre}','${doc.data().puntuacion}' ,'${doc.data().servicios}' 
       ,'${doc.data().presupuesto}','${doc.data().ubicacion}')" 
       >Ver detalles</a>
-      <a href="#" class="btn btn-outline-primary btn-block">Registrar Momento</a>
     </div>
   </div>
     `
     })
 }
 
-function VerDetalle(Nombre_sitio, Puntuacion, Servicios, Presupuesto, Ubicacion){
+function VerDetalle(Id,Nombre_sitio, Puntuacion, Servicios, Presupuesto, Ubicacion){
     myVar = {
+        id: Id,
         nombre: Nombre_sitio,
         puntuacion: Puntuacion,
         servicios: Servicios,
         presupuesto: Presupuesto,
         ubicacion: Ubicacion,
     };
+    console.log(Id);
     localStorage['detallesitioalmacenado'] = JSON.stringify(myVar);
     window.location.href="detalles.html";
 }
