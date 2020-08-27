@@ -50,7 +50,6 @@ window.addEventListener('DOMContentLoaded', async (e) => {
         <div class="titulo"><p><b>Puntuacion:</b>${SitioSeleccionado.puntuacion}  </p></div>
         <div class="titulo"><p><b>Servicio:</b> ${SitioSeleccionado.servicios} </p></div>
         <div class="titulo"><p><b>Presupuesto:</b> ${SitioSeleccionado.presupuesto} </p></div>
-   
     `
     } else {
         console.log('error no se esta guardando el sitio en detalles');
@@ -74,20 +73,24 @@ window.addEventListener('DOMContentLoaded', async (e) => {
 
 function subirImagen() {
     var archivoFile = archivo.files[0];
+    if (archivoFile) {
 
+        var uploadTask = storage.ref('imagenes/' + archivoFile.name).put(archivoFile)
+            .then((img) => {
+                console.log("Imagen subida..", img.totalBytes);
+                storage.ref('imagenes/' + archivoFile.name).getDownloadURL()
+                    .then((UrlImg) => {
+                        imgArchivo.src = UrlImg;
+                        console.log(UrlImg);
+                        var Experiencia = ObtenerId("mensaje");
 
-    var uploadTask = storage.ref('imagenes/' + archivoFile.name).put(archivoFile)
-        .then((img) => {
-            console.log("Imagen subida..", img.totalBytes);
-            storage.ref('imagenes/' + archivoFile.name).getDownloadURL()
-                .then((UrlImg) => {
-                    imgArchivo.src = UrlImg;
-                    console.log(UrlImg);
-                    var Experiencia = ObtenerId("mensaje");
+                        ColeccionMomentos(Experiencia, UrlImg, myUsuario, SitioSeleccionado.id);
+                    });
+            });
 
-                    ColeccionMomentos(Experiencia, UrlImg, myUsuario, SitioSeleccionado.id);
-                });
-        });
+    } else {
+        alert('Parece que no a seleccionado una imagen')
+    }
 
 }
 
