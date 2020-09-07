@@ -1,0 +1,57 @@
+<div class="contenedor_detalles">
+
+    {{#each sitio}}
+    <div class="contenedor_img">
+        <img class="img" src={{urlimg}} />
+    </div>
+
+    <div id="task_datos_sitio">
+        <div class="titulo">
+            <p><b>Sitio:</b>{{nombre}} </p>
+        </div>
+        <div class="titulo">
+            <p><b>Puntuacion:</b>{{puntuacion}} </p>
+        </div>
+        <div class="titulo">
+            <p><b>Servicio:</b>{{servicios}} </p>
+        </div>
+        <div class="titulo">
+            <p><b>Presupuesto:</b>{{presupuesto}} </p>
+        </div>
+
+    </div>
+
+    {{/each}}
+
+    <p><textarea name="mensaje" id="mensaje" class="text_area"
+            placeholder="Cuentanos tu experiencia en este sitio"></textarea></p>
+    <input class="bton_momento" name="archivo" id="archivo" type="file">
+    <img src="" name="imgSubida" id="imgSubida" alt="">
+    <div> <input type="button" class="bton_momento" value="Registrar Momento" onclick="subirImagen()"></div>
+
+
+
+</div>
+
+<div class="container">
+    <hr>
+    <h1>Momentos de los usuarios</h1>
+    <hr>
+    <div class="row">
+        <div class="card-columns" id="task_momentos">
+            {{#each momentos}}
+
+            <div class="card" style="width: 20rem;">
+                <img class="card-img-top img-fluid" src={{urlimagen}} name="imgSubida" id="imgSubida"
+                    alt="">
+                <div class="card-block">
+                    <h4 class="card-title"> Usuario: {{fkusuario}}</h4>
+                    <p class="card-text"> Experiencia: {{experiencia}} </p>
+                </div>
+            </div>
+
+
+            {{/each}}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,37 @@
+<header>
+    <nav class="navbar navbar-expand-md navbar-dark ">
+
+      
+        <ul class="navbar-nav">
+
+            {{#if user}}
+
+            <li class="nav-item active" id="cerrar_sesion">
+                <a href="/" class="nav-link" onclick="Menu_Cerrarsesion()">Cerrar sesión</a>
+            </li>
+
+            {{else}}
+
+            <li class="nav-item active" id="iniciar_sesion">
+                <a href="/login" class="nav-link">Iniciar sesión</a>
+            </li>
+            <li class="nav-item active" id="registrarse">
+                <a href="/registrarse" class="nav-link">Registrarse</a>
+            </li>
+
+            {{/if}}
+
+
+
+
+            <li class="nav-item active" id="registrar_sitio">
+                <a href="/registrarsitio?user={{user}}&rol={{rol}}" class="nav-link">Registrar sitio turístico</a>
+            </li>
+        </ul>
+
+        <form class="form-inline" method="POST" action="">
+            <input name="buscar" class="form-control mr-sm-2" type="text">
+            <button name="btnSalir" class="btn btn-outline my-2 my-sm-0" type="submit">Buscar</button>
+        </form>
+    </nav>
+</header>

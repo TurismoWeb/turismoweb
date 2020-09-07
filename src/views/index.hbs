@@ -1,0 +1,69 @@
+{{> navegacion}}
+
+<div class="mt-5"></div>
+
+<hr>
+<h1>Sitios turisticos en el caquetá</h1>
+<hr>
+{{!-- 
+{{#if user}}
+<p>Tenemos el usuario: {{user}}</p>
+{{/if}}
+
+{{#if rol}}
+<p>Tenemos el usuario: {{rol}}</p>
+{{/if}}
+
+{{#if sitios}}
+<p>tengo el query de los sitios</p>
+{{/if}} --}}
+
+<div class="modal-body row">
+
+    <div class="card-columns" id="tasks-sitios">
+        {{#if sitios}}
+        {{#each sitios}}
+
+        {{!--    <div class="card" style="width: 20rem;">
+            <img class="card-img-top img-fluid" src={{urlimg}} alt="Card image cap">
+            <div class="card-block">
+
+                <h4 class="card-title"> {{nombre}} </h4>
+                <p class="card-text"><b>UBICACIÓN:</b> {{ubicacion}} </p>
+                <p class="card-text"><b>PUNTUACION:</b> {{puntuacion}} </p>
+                <p class="card-text"><b>SERVICIOS:</b>{{servicios}} </p>
+                <p class="card-text"><b>PRESUPUETO:</b> {{presupuesto}} </p>
+
+                <a href="/detallessitio?sitio={{nombre}}" class="btn btn-outline-primary btn-block"
+                    value="Ver detalles"> Ver detalles </a>
+                {{#if rol}}
+                <a href="/verificarsitio?idsitio={{id}}" class="btn btn-outline btn-block">Verificar
+                    sitio</a>
+                {{/if}}
+            </div>
+        </div> --}}
+
+
+        <div class="card cardpadre" style="width: 18rem;">
+            <img class="card-img-top" src={{urlimg}} alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title"><b>{{nombre}}</b></h5>
+                <p class="card-text"><b>UBICACIÓN:</b> {{ubicacion}} </p>
+                <p class="card-text"><b>PUNTUACION:</b> {{puntuacion}} </p>
+                <p class="card-text"><b>SERVICIOS:</b>{{servicios}} </p>
+                <p class="card-text"><b>PRESUPUETO:</b> {{presupuesto}} </p>
+                <a href="/detallessitio?sitio={{nombre}}" class="btn btn-primary">Ver detalles</a>
+               
+                {{#if estado_validacion }} 
+                <a href="/verificarsitio?idsitio={{id}}" class="btn btn-primary">Validar Sitio</a>
+                {{/if}}
+            </div>
+        </div>
+
+        {{/each}}
+        {{/if}}
+    </div>
+
+</div>
+
+{{> footer}}

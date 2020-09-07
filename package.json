@@ -1,0 +1,33 @@
+{
+  "name": "turismoweb",
+  "version": "1.0.0",
+  "description": "Proyecto final de web, Pagina web de turismo en el caquetá",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "startdev": "nodemon src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TurismoWeb/turismoweb.git"
+  },
+  "keywords": [
+    "turismo",
+    "caqueta"
+  ],
+  "author": "Edwin Stiven Quebrada Antury, Juan Camilo Lopez Marin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TurismoWeb/turismoweb/issues"
+  },
+  "homepage": "https://github.com/TurismoWeb/turismoweb#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-handlebars": "^5.1.0",
+    "firebase": "^7.19.1",
+    "firebase-admin": "^9.1.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
