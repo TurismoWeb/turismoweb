@@ -11,4 +11,5 @@ router.get('/verificarsitio', control.verificarsitio);
 router.post('/registrarusuario', control.registrarusuario); 
 router.post('/registrarsitiopost', control.registrarsitiopost);
 router.post('/validarusuariopost', control.validarusuariopost);
+router.post('/registrarmomento', control.registrarmomento);
 module.exports = router;

@@ -21,22 +21,22 @@ const getMomentosSitio = (idd) => db.collection('momentos_sitios')
 
 
 controlador.inicio = (req, res) => {
-    console.log('-------------- Presiono el post controlador.inicio ---------------')
+    console.log('-------------- Presiono el  controlador.inicio ---------------')
     _mostrarsitiosverificados(res, req);
 }
 
 controlador.login = (req, res) => {
-    console.log('-------------- Presiono el post controlador.login ---------------')
+    console.log('-------------- Presiono el  controlador.login ---------------')
     res.render('./admin/login');
 }
 
 controlador.registrarse = (req, res) => {
-    console.log('-------------- Presiono el post controlador.registrarse ---------------')
+    console.log('-------------- Presiono el  controlador.registrarse ---------------')
     res.render('./admin/registrarse');
 }
 
 controlador.registrarsitio = (req, res) => {
-    console.log('-------------- Presiono el post controlador.registrarsitio ---------------')
+    console.log('-------------- Presiono el  controlador.registrarsitio ---------------')
     if (req.query.user) {
         console.log(req.query.user);
         res.render('./admin/registrarsitio', { user: req.query.user, rol: req.query.rol });
@@ -50,6 +50,7 @@ controlador.registrarsitio = (req, res) => {
 controlador.detallessitio = async (req, res) => {
     console.log('-------------- Presiono el post controlador.detallessitio ---------------')
     console.log(req.query.sitio);
+    console.log(req.query.user);
 
     const querySnapshot = await getSitioEspecifico(req.query.sitio);
 
@@ -67,7 +68,8 @@ controlador.detallessitio = async (req, res) => {
             urlimg: doc.data().urlimg,
             servicios: doc.data().servicios,
             estado_validacion: doc.data().estado_validacion,
-            nombre: doc.data().nombre
+            nombre: doc.data().nombre,
+            user: req.query.user
         };
         sitiob.push(document);
 
@@ -85,7 +87,7 @@ controlador.detallessitio = async (req, res) => {
 
         console.log(sitiob);
         console.log(momentos_sitios);
-        res.render('./admin/detallesitio.hbs', { sitio: sitiob, momentos: momentos_sitios });
+        res.render('./admin/detallesitio.hbs', { user: req.query.user, sitio: sitiob, momentos: momentos_sitios });
 
     })
 }
@@ -182,6 +184,47 @@ controlador.registrarsitiopost = async (req, res) => {
     } */
 }
 
+controlador.registrarmomento = (req, res) => {
+    console.log('-------------- Presiono el post controlador.registrarsmomento ---------------')
+    console.log(req.body)
+    console.log(req.query.user)
+    console.log(req.query.idsitio)
+    /*  var archivoFile = req.body.archivoregistrarmomento; */
+    /* if (archivoFile) {
+        console.log('Entro al archivo punto file true'); */
+
+    if (req.query.user) {
+
+        var Experiencia = req.body.experiencia;
+        var User = req.query.user;
+        var Sitio = req.query.idsitio;
+
+        if (Experiencia.length != 0) {
+            db.collection("momentos_sitios").doc().set({
+                experiencia: Experiencia,
+                fksitio: Sitio,
+                fkusuario: User
+            })
+                .then(function (docRef) {
+                    console.log('ALERT : REGISTRO EXITOSO');
+                    console.log("CONSOLE: momento registrado: ");
+                    res.redirect('back');
+                })
+                .catch(function (error) {
+                    console.log("CONSOLE: Error registrando momento: ", error);
+                });
+        } else {
+            console.log("ALERT: NO SE VALIDO BIEN LOS CAMPOS: ");
+        }
+    } else {
+        console.log('debe iniciar sesión para registrar un momento')
+        res.redirect('/login');
+    }
+    /* } else {
+        console.log("ALERT: NO SELECCIONO IMAGEN ");
+    } */
+}
+
 controlador.validarusuariopost = (req, res) => {
     console.log('-------------- Presiono el post controlador.validarusuariopost ---------------')
 
@@ -269,7 +312,8 @@ async function _mostrarsitiosverificados(res, req) {
             urlimg: doc.data().urlimg,
             servicios: doc.data().servicios,
             estado_validacion: doc.data().estado_validacion == 0 ? 1 : null,
-            nombre: doc.data().nombre
+            nombre: doc.data().nombre,
+            user: User
 
         };
         documents.push(document);
@@ -347,5 +391,7 @@ function ValidarCamposVaciosSitio(Nombre_sitio, Puntuacion, Servicios, Presupues
     }
     return Comprobar;
 }
+
+
 
 module.exports = controlador;

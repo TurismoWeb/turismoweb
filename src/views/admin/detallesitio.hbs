@@ -21,15 +21,15 @@
 
     </div>
 
+    <form method="POST" action="/registrarmomento?user={{user}}&idsitio={{id}}">
+        <textarea name="experiencia" id="mensaje" class="text_area"
+            placeholder="Cuentanos tu experiencia en este sitio"></textarea>
+        <img src="" name="imgSubida" id="imgSubida" alt="">
+        <input name="archivoregistrarmomento" class="bton_momento" type="file">
+        <input class="bton_momento" type="submit" value="Registrar Momento" />
+    </form>
+
     {{/each}}
-
-    <p><textarea name="mensaje" id="mensaje" class="text_area"
-            placeholder="Cuentanos tu experiencia en este sitio"></textarea></p>
-    <input class="bton_momento" name="archivo" id="archivo" type="file">
-    <img src="" name="imgSubida" id="imgSubida" alt="">
-    <div> <input type="button" class="bton_momento" value="Registrar Momento" onclick="subirImagen()"></div>
-
-
 
 </div>
 
@@ -42,8 +42,7 @@
             {{#each momentos}}
 
             <div class="card" style="width: 20rem;">
-                <img class="card-img-top img-fluid" src={{urlimagen}} name="imgSubida" id="imgSubida"
-                    alt="">
+                <img class="card-img-top img-fluid" src={{urlimagen}} name="imgSubida" id="imgSubida" alt="">
                 <div class="card-block">
                     <h4 class="card-title"> Usuario: {{fkusuario}}</h4>
                     <p class="card-text"> Experiencia: {{experiencia}} </p>
