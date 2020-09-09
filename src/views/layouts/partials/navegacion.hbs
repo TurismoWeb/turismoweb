@@ -1,37 +1,56 @@
 <header>
-    <nav class="navbar navbar-expand-md navbar-dark ">
-
-      
-        <ul class="navbar-nav">
-
-            {{#if user}}
-
-            <li class="nav-item active" id="cerrar_sesion">
-                <a href="/" class="nav-link" onclick="Menu_Cerrarsesion()">Cerrar sesión</a>
-            </li>
-
-            {{else}}
-
-            <li class="nav-item active" id="iniciar_sesion">
-                <a href="/login" class="nav-link">Iniciar sesión</a>
-            </li>
-            <li class="nav-item active" id="registrarse">
-                <a href="/registrarse" class="nav-link">Registrarse</a>
-            </li>
-
-            {{/if}}
 
 
+    <nav class="navbar navbar-expand-lg navbar-light  fixed-top">
+        <div class="container">
 
+            <a href="#" class="logoT"><img src="img/logo.png" width="60px" alt="">Turismo</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-            <li class="nav-item active" id="registrar_sitio">
-                <a href="/registrarsitio?user={{user}}&rol={{rol}}" class="nav-link">Registrar sitio turístico</a>
-            </li>
-        </ul>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
 
-        <form class="form-inline" method="POST" action="">
-            <input name="buscar" class="form-control mr-sm-2" type="text">
-            <button name="btnSalir" class="btn btn-outline my-2 my-sm-0" type="submit">Buscar</button>
-        </form>
+                    {{#if user}}
+
+                    {{#if sitios}}
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" class="btn1" data-toggle="modal"
+                            data-target="#modalSubscriptionForm-registrarsitio">Registro Sitio Turistico</a>
+                    </li>
+                    {{/if}}
+
+                    <li class="nav-item active" id="cerrar_sesion">
+                        <a href="/" class="nav-link">Cerrar sesión</a>
+                    </li>
+
+                    {{else}}
+
+                    {{#if sitios}}
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" class="btn1" data-toggle="modal"
+                            data-target="#modalSubscriptionForm-login">Registro Sitio
+                            Turistico</a>
+                    </li>
+                    {{/if}}
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" class="btn1" data-toggle="modal"
+                            data-target="#modalSubscriptionForm">Registrarse</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" class="btn1" data-toggle="modal"
+                            data-target="#modalSubscriptionForm-login">Iniciar Sesión</a>
+                    </li>
+
+                    {{/if}}
+
+                </ul>
+            </div>
+        </div>
     </nav>
+
+
 </header>

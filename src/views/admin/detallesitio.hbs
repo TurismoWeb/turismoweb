@@ -1,56 +1,61 @@
-<div class="contenedor_detalles">
+{{> navegacion}}
 
-    {{#each sitio}}
-    <div class="contenedor_img">
-        <img class="img" src={{urlimg}} />
-    </div>
+<!-- Modal Sing Up-->
 
-    <div id="task_datos_sitio">
-        <div class="titulo">
-            <p><b>Sitio:</b>{{nombre}} </p>
+{{> modal_login}}
+
+<!-- Modal Registrar usuario -->
+
+{{> modal_registrarusuario}}
+
+{{#each sitio}}
+
+<div class="small-container2 single-sitio">
+    <div class="row2">
+        <div class="col-22">
+            <img src="img/t1.jpg">
         </div>
-        <div class="titulo">
-            <p><b>Puntuacion:</b>{{puntuacion}} </p>
-        </div>
-        <div class="titulo">
-            <p><b>Servicio:</b>{{servicios}} </p>
-        </div>
-        <div class="titulo">
-            <p><b>Presupuesto:</b>{{presupuesto}} </p>
-        </div>
-
-    </div>
-
-    <form method="POST" action="/registrarmomento?user={{user}}&idsitio={{id}}">
-        <textarea name="experiencia" id="mensaje" class="text_area"
-            placeholder="Cuentanos tu experiencia en este sitio"></textarea>
-        <img src="" name="imgSubida" id="imgSubida" alt="">
-        <input name="archivoregistrarmomento" class="bton_momento" type="file">
-        <input class="bton_momento" type="submit" value="Registrar Momento" />
-    </form>
-
-    {{/each}}
-
-</div>
-
-<div class="container">
-    <hr>
-    <h1>Momentos de los usuarios</h1>
-    <hr>
-    <div class="row">
-        <div class="card-columns" id="task_momentos">
-            {{#each momentos}}
-
-            <div class="card" style="width: 20rem;">
-                <img class="card-img-top img-fluid" src={{urlimagen}} name="imgSubida" id="imgSubida" alt="">
-                <div class="card-block">
-                    <h4 class="card-title"> Usuario: {{fkusuario}}</h4>
-                    <p class="card-text"> Experiencia: {{experiencia}} </p>
-                </div>
+        <div class="col-22">
+            <h1><b>Sitio:</b>{{nombre}}</h1>
+            <div class="datos">
+                <a href=""><b>Puntuacion : </b>{{puntuacion}}</a>
+                <a href=""><b>Servicio : </b>{{servicios}}</a>
+                <a href=""><b>Presupuesto : </b>{{presupuesto}}</a>
             </div>
-
-
-            {{/each}}
         </div>
     </div>
 </div>
+
+<!-- Momentos -->
+
+<div class="small-container11">
+    <div class="row1">
+        <h2 class="title1">Momentos vividos por usuarios</h2>
+        <form method="POST" class="form-exp" action="/registrarmomento?user={{user}}&idsitio={{id}}">
+            <input name="experiencia" type="text" placeholder="Ejemplo: Comparte tu experiencia">
+            <!-- <input type="file" name="archivo"> -->
+            {{!--  <input name="archivoregistrarmomento" class="btn1" type="file"> --}}
+            <button type="submit" class="btn1">Registrar</button>
+        </form>
+    </div>
+</div>
+
+{{/each}}
+
+<div class="small-container1">
+    <div class="row1">
+        {{#each momentos}}
+        <div class="col-66">
+            <a href=""><img src="img/t2.jpg"></a>
+            <hr>
+            <h4>Usuario : {{fkusuario}}</h4>
+            <p>Experiencia : {{experiencia}}</p>
+        </div>
+        {{/each}}
+    </div>
+</div>
+
+
+<!-- Footer -->
+
+{{> footer}}

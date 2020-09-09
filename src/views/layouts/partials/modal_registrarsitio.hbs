@@ -1,0 +1,38 @@
+<form method="POST" action="/registrarsitiopost?user={{user}}&rol={{rol}}">
+
+    <div class="modal fade" id="modalSubscriptionForm-registrarsitio" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h4 class="modal-title w-100 font-weight-bold">Registra sitio turístico</h4>
+                    {{#if user}}
+                    <p>Hola, señor/a  {{user}}</p>
+                    {{/if}}
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body mx-3 col-22">
+
+                    <div class="md-form mb-4"><input type="text" name="nombre_sitio" class="form-control validate"
+                            placeholder="Ingrese el nombre"></div>
+                    <div class="md-form mb-4"><input type="text" name="ubicacion" class="form-control validate"
+                            placeholder="Detalle la ubicacion"> </div>
+                    <div class="md-form mb-4"><input type="number" name="puntuacion" class="form-control validate"
+                            placeholder="Ingrese una puntuación"></div>
+                    <div class="md-form mb-4"><input type="text" name="servicios" class="form-control validate"
+                            placeholder="Detalle los servicios"></div>
+                    <div class="md-form mb-4"><input type="text" name="presupuesto" class="form-control validate"
+                            placeholder="Detalle un presupuesto para pasarla bueno"></div>
+
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                   {{!--  <input type="file" name="archivoregistrarsitio" class="btn1" /> --}}
+                    <input type="submit" class="btn1" value="Registrar Sítio" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>

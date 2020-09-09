@@ -1,12 +1,12 @@
-const { firebase, admin } = require('../configfirebase')
-//const { Storage } = require('@google-cloud/storage'); 
+const { firebase, admin, storage } = require('../configfirebase')
 const { database } = require('firebase-admin');
 const controlador = {};
-//const storage = new Storage(); 
+
+var bucket = admin.storage().bucket();
+
 const db = firebase.firestore();
 const url = require('url');
 
-var bucket = admin.storage().bucket();
 
 const getSitiosVerificados = () => db.collection('sitios_turisticos')
     .where("estado_validacion", "==", 1).get();
@@ -136,9 +136,19 @@ controlador.registrarsitiopost = async (req, res) => {
     console.log(req.body)
     var User = req.query.user;
     var Rol = req.query.rol;
-    /*  var archivoFile = req.body.archivoregistrarsitio; */
-    /* if (archivoFile) {
-        console.log('Entro al archivo punto file true'); */
+    /*  var archivoFile = req.body.archivoregistrarsitio;
+     if (archivoFile) {
+         console.log('Entro al archivo punto file true');
+ 
+ 
+         storage.bucket('bucket').upload('imagenessitios/' + archivoFile, {
+             gzip: true,
+ 
+             metadata: {
+                 cacheControl: 'public, max-age=31536000',
+             },
+         }); */
+
 
     var Nombre_sitio = req.body.nombre_sitio;
     var Puntuacion = req.body.puntuacion;
@@ -179,9 +189,9 @@ controlador.registrarsitiopost = async (req, res) => {
     } else {
         console.log("ALERT: NO SE VALIDO BIEN LOS CAMPOS: ");
     }
-    /* } else {
-        console.log("ALERT: NO SELECCIONO IMAGEN ");
-    } */
+    /*  } else {
+         console.log("ALERT: NO SELECCIONO IMAGEN ");
+     } */
 }
 
 controlador.registrarmomento = (req, res) => {
@@ -302,6 +312,8 @@ async function _mostrarsitiosverificados(res, req) {
     }
 
     const documents = [];
+    const documentssliders = [];
+    var i=0;
     querySnapshot.forEach(doc => {
         const document = {
             id: doc.id,
@@ -312,16 +324,21 @@ async function _mostrarsitiosverificados(res, req) {
             urlimg: doc.data().urlimg,
             servicios: doc.data().servicios,
             estado_validacion: doc.data().estado_validacion == 0 ? 1 : null,
+            estado_activeslider: i == 0 ? 1 : null,
             nombre: doc.data().nombre,
             user: User
 
         };
+        if(i<3){
+            documentssliders.push(document);
+            i++;
+        }
         documents.push(document);
     })
 
 
     //console.log(documents);
-    res.render('index', { sitios: documents, user: User, rol: Rol });
+    res.render('index', { sitios: documents, sitiossliders : documentssliders, user: User, rol: Rol });
 }
 
 

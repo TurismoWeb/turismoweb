@@ -1,69 +1,107 @@
 {{> navegacion}}
 
-<div class="mt-5"></div>
+<!-- Modal Sing Up-->
 
-<hr>
-<h1>Sitios turisticos en el caquetá</h1>
-<hr>
+{{> modal_login}}
+
+<!-- Modal Registrar usuario -->
+
+{{> modal_registrarusuario}}
+
+<!-- Modal Registrar sìtio -->
+
+{{> modal_registrarsitio}}
+
 {{!-- 
 {{#if user}}
 <p>Tenemos el usuario: {{user}}</p>
 {{/if}}
 
 {{#if rol}}
-<p>Tenemos el usuario: {{rol}}</p>
+<p>Tenemos el Rol: {{rol}}</p>
 {{/if}}
 
 {{#if sitios}}
 <p>tengo el query de los sitios</p>
 {{/if}} --}}
 
-<div class="modal-body row">
 
-    <div class="card-columns" id="tasks-sitios">
-        {{#if sitios}}
-        {{#each sitios}}
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
 
-        {{!--    <div class="card" style="width: 20rem;">
-            <img class="card-img-top img-fluid" src={{urlimg}} alt="Card image cap">
-            <div class="card-block">
+        {{#if sitiossliders}}
+        {{#each sitiossliders}}
 
-                <h4 class="card-title"> {{nombre}} </h4>
-                <p class="card-text"><b>UBICACIÓN:</b> {{ubicacion}} </p>
-                <p class="card-text"><b>PUNTUACION:</b> {{puntuacion}} </p>
-                <p class="card-text"><b>SERVICIOS:</b>{{servicios}} </p>
-                <p class="card-text"><b>PRESUPUETO:</b> {{presupuesto}} </p>
-
-                <a href="/detallessitio?sitio={{nombre}}" class="btn btn-outline-primary btn-block"
-                    value="Ver detalles"> Ver detalles </a>
-                {{#if rol}}
-                <a href="/verificarsitio?idsitio={{id}}" class="btn btn-outline btn-block">Verificar
-                    sitio</a>
+        {{#if estado_activeslider}}
+        <div class="carousel-item active">
+            {{else}}
+            <div class="carousel-item">
                 {{/if}}
-            </div>
-        </div> --}}
 
-
-        <div class="card cardpadre" style="width: 18rem;">
-            <img class="card-img-top" src={{urlimg}} alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title"><b>{{nombre}}</b></h5>
-                <p class="card-text"><b>UBICACIÓN:</b> {{ubicacion}} </p>
-                <p class="card-text"><b>PUNTUACION:</b> {{puntuacion}} </p>
-                <p class="card-text"><b>SERVICIOS:</b>{{servicios}} </p>
-                <p class="card-text"><b>PRESUPUETO:</b> {{presupuesto}} </p>
-                <a href="/detallessitio?user={{user}}&sitio={{nombre}}" class="btn btn-primary">Ver detalles</a>
-               
-                {{#if estado_validacion }} 
-                <a href="/verificarsitio?idsitio={{id}}" class="btn btn-primary">Validar Sitio</a>
-                {{/if}}
+                <img class="d-block w-100" src="/img/t1.png" alt="First slide">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5><b>{{nombre}}</b></h5>
+                    <p>Este maravilloso sitio se ubica en {{ubicacion}}, en el que te ofreceran los servicios de
+                        {{servicios}} y para pasarla agradablemente el presupuesto recomendado es {{presupuesto}} </p>
+                </div>
             </div>
+
+            {{/each}}
+            {{/if}}
+
         </div>
-
-        {{/each}}
-        {{/if}}
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
     </div>
 
-</div>
+    <!-- SITIOS TURISTICOS -->
 
-{{> footer}}
+    <div class="small-container1">
+        <h2 class="title1">Sitios turisticos publicados por usuarios</h2>
+        <hr>
+        <div class="row1">
+            {{#if sitios}}
+            {{#each sitios}}
+
+            <div class="col-41">
+                <a href=""><img src="img/t2.jpg"></a>
+                <hr>
+                <a href="">
+                    <h4><b>{{nombre}}</b></h4>
+                </a>
+                <hr>
+                <div class="datos">
+                    <a href=""><b>UBICACIÓN : </b> {{ubicacion}} </a>
+                    <a href=""><b>PUNTUACION : </b> {{puntuacion}}</a>
+                    <a href=""><b>SERVICIOS : </b>{{servicios}}</a>
+                    <a href=""><b>PRESUPUETO : </b> {{presupuesto}}</a>
+                </div>
+                <hr>
+                <a href="/detallessitio?user={{user}}&sitio={{nombre}}" class="btn1">Ver detalles</a>
+
+                {{#if estado_validacion }}
+                <a href="/verificarsitio?idsitio={{id}}" class="btn1">Validar Sitio</a>
+                {{/if}}
+
+            </div>
+
+            {{/each}}
+            {{/if}}
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+
+    {{> footer}}
