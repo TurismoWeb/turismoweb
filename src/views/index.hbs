@@ -43,7 +43,7 @@
             <div class="carousel-item">
                 {{/if}}
 
-                <img class="d-block w-100" src="/img/t1.png" alt="First slide">
+                <img class="d-block w-100" src={{urlimg}} alt="First slide">
                 <div class="carousel-caption d-none d-md-block">
                     <h5><b>{{nombre}}</b></h5>
                     <p>Este maravilloso sitio se ubica en {{ubicacion}}, en el que te ofreceran los servicios de
@@ -75,7 +75,7 @@
             {{#each sitios}}
 
             <div class="col-41">
-                <a href=""><img src="img/t2.jpg"></a>
+                <a href=""><img src={{urlimg}}></a>
                 <hr>
                 <a href="">
                     <h4><b>{{nombre}}</b></h4>
@@ -88,7 +88,7 @@
                     <a href=""><b>PRESUPUETO : </b> {{presupuesto}}</a>
                 </div>
                 <hr>
-                <a href="/detallessitio?user={{user}}&sitio={{nombre}}" class="btn1">Ver detalles</a>
+                <a href="/detallessitio?user={{user}}&sitio={{nombre}}&rol={{rol}}" class="btn1">Ver detalles</a>
 
                 {{#if estado_validacion }}
                 <a href="/verificarsitio?idsitio={{id}}" class="btn1">Validar Sitio</a>

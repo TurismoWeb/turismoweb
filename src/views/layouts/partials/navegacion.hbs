@@ -20,9 +20,13 @@
                         <a class="nav-link" href="#" class="btn1" data-toggle="modal"
                             data-target="#modalSubscriptionForm-registrarsitio">Registro Sitio Turistico</a>
                     </li>
+                    {{else}}
+                    <li class="nav-item active">
+                        <a href="/?rol={{rol}}&user={{user}}" class="nav-link">Inicio</a>
+                    </li>
                     {{/if}}
 
-                    <li class="nav-item active" id="cerrar_sesion">
+                    <li class="nav-item active">
                         <a href="/" class="nav-link">Cerrar sesión</a>
                     </li>
 
@@ -31,8 +35,11 @@
                     {{#if sitios}}
                     <li class="nav-item">
                         <a class="nav-link" href="#" class="btn1" data-toggle="modal"
-                            data-target="#modalSubscriptionForm-login">Registro Sitio
-                            Turistico</a>
+                            data-target="#modalSubscriptionForm-login">Registro Sitio Turistico</a>
+                    </li>
+                    {{else}}
+                    <li class="nav-item active">
+                        <a href="/" class="nav-link">Inicio</a>
                     </li>
                     {{/if}}
 

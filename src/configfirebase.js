@@ -1,12 +1,16 @@
 const admin = require("firebase-admin");
 const firebase = require('firebase');
-const { Storage } = require('@google-cloud/storage');
+const { Storage } = require('@google-cloud/storage')
+
 
 const serviceAccount = require("./zclave_privada_firebase.json");
 
+const projectId = 'turismo2-4b07d';
+const keyFilename = './src/zclave_privada_firebase.json';
 const storage = new Storage({
-  keyFilename: "./zclave_privada_firebase.json",
-});
+  projectId, // Está en la configuración de Firebase.
+  keyFilename // La ruta al JSON de Firebase en NodeJS
+})
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),

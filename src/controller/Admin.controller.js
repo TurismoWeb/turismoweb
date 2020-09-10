@@ -2,7 +2,10 @@ const { firebase, admin, storage } = require('../configfirebase')
 const { database } = require('firebase-admin');
 const controlador = {};
 
-var bucket = admin.storage().bucket();
+const bucket = storage.bucket('turismo2-4b07d.appspot.com');
+
+/* var defaultStorage = admin.storage();
+var bucket = defaultStorage.bucket('turismo2-4b07d.appspot.com'); */
 
 const db = firebase.firestore();
 const url = require('url');
@@ -77,7 +80,7 @@ controlador.detallessitio = async (req, res) => {
         querySnapshot.forEach(doc2 => {
             const document2 = {
                 id: doc2.id,
-                urlimagen: doc2.data().urlimagen,
+                urlimg: doc2.data().urlimagen,
                 fkusuario: doc2.data().fkusuario,
                 experiencia: doc2.data().experiencia
             };
@@ -87,7 +90,7 @@ controlador.detallessitio = async (req, res) => {
 
         console.log(sitiob);
         console.log(momentos_sitios);
-        res.render('./admin/detallesitio.hbs', { user: req.query.user, sitio: sitiob, momentos: momentos_sitios });
+        res.render('./admin/detallesitio.hbs', { user: req.query.user, rol: req.query.rol, sitio: sitiob, momentos: momentos_sitios });
 
     })
 }
@@ -136,103 +139,150 @@ controlador.registrarsitiopost = async (req, res) => {
     console.log(req.body)
     var User = req.query.user;
     var Rol = req.query.rol;
-    /*  var archivoFile = req.body.archivoregistrarsitio;
-     if (archivoFile) {
-         console.log('Entro al archivo punto file true');
- 
- 
-         storage.bucket('bucket').upload('imagenessitios/' + archivoFile, {
-             gzip: true,
- 
-             metadata: {
-                 cacheControl: 'public, max-age=31536000',
-             },
-         }); */
+    var UrlImg = '';
+    var archivoFile = req.body.archivoregistrarsitio;
 
+    if (archivoFile) {
+        console.log('Entro al archivo punto file true');
 
-    var Nombre_sitio = req.body.nombre_sitio;
-    var Puntuacion = req.body.puntuacion;
-    var Servicios = req.body.servicios;
-    var Presupuesto = req.body.presupuesto;
-    var Ubicacion = req.body.ubicacion;
-    var EstadoValidacion = 0;
+        await bucket.upload('./src/public/img/' + archivoFile, {
+            destination: 'imagenessitios/' + archivoFile,
+            metadata: {
+                contentType: 'image/jpeg'
+            }
+        }).then((data) => {
+            let file = data[0]
+            file.getSignedUrl({
+                action: 'read',
+                expires: '03-17-2025'
+            }, function (err, urlres) {
+                if (err) {
+                    console.log('Hubo un error cargando sitio, en carga de imagen');
+                    console.error(err);
+                    return;
+                } else {
+                    UrlImg = urlres;
+                    console.log(urlres);
 
-    if (ValidarCamposVaciosSitio(Nombre_sitio, Puntuacion, Servicios,
-        Presupuesto, Ubicacion, EstadoValidacion)) {
-        db.collection("sitios_turisticos").doc().set({
-            nombre: Nombre_sitio,
-            puntuacion: Puntuacion,
-            servicios: Servicios,
-            presupuesto: Presupuesto,
-            ubicacion: Ubicacion,
-            estado_validacion: EstadoValidacion,
-            fk_usuario: User
-        })
-            .then(function (docRef) {
-                console.log('ALERT : REGISTRO EXITOSO');
-                console.log("CONSOLE: Sítio registrado: ");
-                var us = encodeURIComponent(User);
-                var rool = encodeURIComponent(Rol);
-                /*  res.redirect('/?user=' + us); */
+                    var Nombre_sitio = req.body.nombre_sitio;
+                    var Puntuacion = req.body.puntuacion;
+                    var Servicios = req.body.servicios;
+                    var Presupuesto = req.body.presupuesto;
+                    var Ubicacion = req.body.ubicacion;
+                    var EstadoValidacion = 0;
 
-                res.redirect(url.format({
-                    pathname: "/",
-                    query: {
-                        "rol": rool,
-                        "user": us
+                    if (ValidarCamposVaciosSitio(Nombre_sitio, Puntuacion, Servicios,
+                        Presupuesto, Ubicacion, EstadoValidacion)) {
+                        db.collection("sitios_turisticos").doc().set({
+                            nombre: Nombre_sitio,
+                            puntuacion: Puntuacion,
+                            servicios: Servicios,
+                            presupuesto: Presupuesto,
+                            ubicacion: Ubicacion,
+                            estado_validacion: EstadoValidacion,
+                            urlimg: UrlImg,
+                            fk_usuario: User
+                        })
+                            .then(function (docRef) {
+                                console.log('ALERT : REGISTRO EXITOSO');
+                                console.log("CONSOLE: Sítio registrado: ");
+                                var us = encodeURIComponent(User);
+                                var rool = encodeURIComponent(Rol);
+                                res.redirect(url.format({
+                                    pathname: "/",
+                                    query: {
+                                        "rol": rool,
+                                        "user": us
+                                    }
+                                }));
+                            })
+                            .catch(function (error) {
+                                console.log("CONSOLE: Error registrando sítio: ", error);
+                            });
+                    } else {
+                        console.log("ALERT: NO SE VALIDO BIEN LOS CAMPOS: ");
                     }
-                }));
+                }
             })
-            .catch(function (error) {
-                console.log("CONSOLE: Error registrando sítio: ", error);
-            });
+        })
+
     } else {
-        console.log("ALERT: NO SE VALIDO BIEN LOS CAMPOS: ");
+        console.log("ALERT: NO SELECCIONO IMAGEN ");
     }
-    /*  } else {
-         console.log("ALERT: NO SELECCIONO IMAGEN ");
-     } */
 }
 
-controlador.registrarmomento = (req, res) => {
+controlador.registrarmomento = async (req, res) => {
     console.log('-------------- Presiono el post controlador.registrarsmomento ---------------')
     console.log(req.body)
     console.log(req.query.user)
     console.log(req.query.idsitio)
-    /*  var archivoFile = req.body.archivoregistrarmomento; */
-    /* if (archivoFile) {
-        console.log('Entro al archivo punto file true'); */
+    var archivoFile = req.body.archivoregistrarmomento;
 
     if (req.query.user) {
 
-        var Experiencia = req.body.experiencia;
-        var User = req.query.user;
-        var Sitio = req.query.idsitio;
+        if (archivoFile) {
+            console.log('Entro al archivo punto file true');
 
-        if (Experiencia.length != 0) {
-            db.collection("momentos_sitios").doc().set({
-                experiencia: Experiencia,
-                fksitio: Sitio,
-                fkusuario: User
-            })
-                .then(function (docRef) {
-                    console.log('ALERT : REGISTRO EXITOSO');
-                    console.log("CONSOLE: momento registrado: ");
-                    res.redirect('back');
+            await bucket.upload('./src/public/img/' + archivoFile, {
+                destination: 'imagenesmomentos/' + archivoFile,
+                metadata: {
+                    contentType: 'image/jpeg'
+                }
+            }).then((data) => {
+                let file = data[0]
+                file.getSignedUrl({
+                    action: 'read',
+                    expires: '03-17-2025'
+                }, function (err, urlres) {
+                    if (err) {
+                        console.log('Hubo un error cargando sitio, en carga de imagen');
+                        console.error(err);
+                        return;
+                    } else {
+                        UrlImg = urlres;
+                        console.log(urlres);
+
+                        var Experiencia = req.body.experiencia;
+                        var User = req.query.user;
+                        var Sitio = req.query.idsitio;
+
+                        if (Experiencia.length != 0) {
+                            db.collection("momentos_sitios").doc().set({
+                                experiencia: Experiencia,
+                                urlimagen: UrlImg,
+                                fksitio: Sitio,
+                                fkusuario: User
+
+                            })
+                                .then(function (docRef) {
+                                    console.log('ALERT : REGISTRO EXITOSO');
+                                    console.log("CONSOLE: momento registrado: ");
+                                    res.redirect('back');
+                                })
+                                .catch(function (error) {
+                                    console.log("CONSOLE: Error registrando momento: ", error);
+                                });
+                        } else {
+                            console.log("ALERT: NO SE VALIDO BIEN LOS CAMPOS: ");
+                        }
+
+
+
+                    }
                 })
-                .catch(function (error) {
-                    console.log("CONSOLE: Error registrando momento: ", error);
-                });
+            })
+
         } else {
-            console.log("ALERT: NO SE VALIDO BIEN LOS CAMPOS: ");
+            console.log("ALERT: NO SELECCIONO IMAGEN ");
         }
+
     } else {
         console.log('debe iniciar sesión para registrar un momento')
         res.redirect('/login');
     }
-    /* } else {
-        console.log("ALERT: NO SELECCIONO IMAGEN ");
-    } */
+
+
+
 }
 
 controlador.validarusuariopost = (req, res) => {
@@ -313,7 +363,7 @@ async function _mostrarsitiosverificados(res, req) {
 
     const documents = [];
     const documentssliders = [];
-    var i=0;
+    var i = 0;
     querySnapshot.forEach(doc => {
         const document = {
             id: doc.id,
@@ -326,10 +376,11 @@ async function _mostrarsitiosverificados(res, req) {
             estado_validacion: doc.data().estado_validacion == 0 ? 1 : null,
             estado_activeslider: i == 0 ? 1 : null,
             nombre: doc.data().nombre,
+            rol: Rol,
             user: User
 
         };
-        if(i<3){
+        if (i < 3) {
             documentssliders.push(document);
             i++;
         }
@@ -338,7 +389,7 @@ async function _mostrarsitiosverificados(res, req) {
 
 
     //console.log(documents);
-    res.render('index', { sitios: documents, sitiossliders : documentssliders, user: User, rol: Rol });
+    res.render('index', { sitios: documents, sitiossliders: documentssliders, user: User, rol: Rol });
 }
 
 
