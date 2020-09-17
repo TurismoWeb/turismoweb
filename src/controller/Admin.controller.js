@@ -360,7 +360,6 @@ async function _mostrarsitiosverificados(res, req) {
         console.log('cargando sitios : no loguedo');
         querySnapshot = await getSitiosVerificados();
     }
-
     const documents = [];
     const documentssliders = [];
     var i = 0;
@@ -386,8 +385,6 @@ async function _mostrarsitiosverificados(res, req) {
         }
         documents.push(document);
     })
-
-
     //console.log(documents);
     res.render('index', { sitios: documents, sitiossliders: documentssliders, user: User, rol: Rol });
 }
